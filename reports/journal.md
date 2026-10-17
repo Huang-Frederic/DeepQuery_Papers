@@ -61,3 +61,10 @@ First tries:
 - q06 (LoRA): right paper first, correct answer, cited [2106.09685].
 - q12 ("What's CLIP?"): retrieval fails (3 RAG papers), the LLM answers "I don't know". No hallucination, but no answer: the error comes from retrieval.
 - q18 (diffusion, out of corpus): "I don't know", followed by an explanation. The prompt asked for exactly "I don't know": the check will have to look at the start of the answer.
+
+## 2026-10-17 - Decision: no formal evaluation of the generated answers
+
+- The single job of our RAG is to find the right papers. Retrieval is what we evaluate objectively (MRR, hit@1, hit@3 on the test set, runs logged in `reports/runs.csv`).
+- The generated answer is a presentation layer on top of the retrieved papers. We show it with commented examples (see the first tries above) instead of scoring it.
+- Considered and not kept for now: reference answers + ROUGE / semantic similarity (a lot of writing for a weak metric), LLM as a judge.
+- Known risks we accept: the LLM could cite a paper it was not given, say "I don't know" when the right paper was retrieved, or answer an out-of-corpus question. Possible follow-up: automatic citation checks (cited ids must be among the given papers).
