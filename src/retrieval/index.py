@@ -11,6 +11,7 @@ from sentence_transformers import SentenceTransformer
 PAPERS_FILE = "data/raw/papers.jsonl"
 INDEX_DIR = "data/index"
 MODEL_NAME = "BAAI/bge-base-en-v1.5"
+QUERY_INSTRUCTION = ""  # bge query prefix, empty = none
 
 
 def load_papers():
@@ -50,7 +51,7 @@ def load_index():
 
 
 def search(query, model, index, ids, k=3):
-    vector = model.encode([query], normalize_embeddings=True)
+    vector = model.encode([QUERY_INSTRUCTION + query], normalize_embeddings=True)
     scores, positions = index.search(vector, k)
 
     results = []

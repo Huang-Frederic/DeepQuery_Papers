@@ -1,0 +1,2 @@
+date,run,model,instruction,test_set,notes,n,mrr,hit1,hit3,mrr_problem,mrr_topic,mrr_similar_paper,mrr_direct,mrr_paraphrase,mrr_acronym,mrr_confusable
+2026-10-17 19:34,v1_baseline,BAAI/bge-base-en-v1.5,none,eval/test_set_v0.jsonl,"title+abstract, one vector per paper",27,0.795,0.7,0.85,0.825,0.701,0.917,1.0,1.0,0.342,0.65

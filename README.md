@@ -32,10 +32,10 @@ pip install -r requirements.txt
 ```bash
 python src/data/fetch_arxiv.py  # corpus v0 -> data/raw/papers.jsonl
 python src/retrieval/index.py   # embeddings + FAISS index -> data/index/
-python src/evaluate.py          # MRR, hit@1, hit@3 -> reports/retrieval_v1.csv
+python src/evaluate.py <run_name> ["notes"]  # MRR, hit@1, hit@3 -> reports/runs.csv
 ```
 
-Run every command from the project root.
+Run every command from the project root. Each evaluation adds one line to `reports/runs.csv` (parameters + scores) and writes per-query details in `reports/details/<run_name>.csv`. Progress and failures are logged in `reports/journal.md`.
 
 ## Data
 
