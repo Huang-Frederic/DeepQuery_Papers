@@ -31,7 +31,11 @@ pip install -r requirements.txt
 
 ```bash
 python src/data/fetch_arxiv.py  # corpus v0 -> data/raw/papers.jsonl
+python src/retrieval/index.py   # embeddings + FAISS index -> data/index/
+python src/evaluate.py          # MRR, hit@1, hit@3 -> reports/retrieval_v1.csv
 ```
+
+Run every command from the project root.
 
 ## Data
 
