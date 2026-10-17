@@ -15,7 +15,7 @@ We work in iterations and measure every version on the same test set:
 1. Corpus v0: 20 hand-picked papers (title + abstract), 5 per topic: NLP, RAG, computer vision, reinforcement learning
 2. Test set v0: questions, each with the paper(s) expected to be retrieved
 3. Retrieval v1: embeddings + FAISS, measured with MRR and hit@3
-4. Generation v1: an LLM answers and cites the retrieved papers
+4. Generation v1: a local LLM (qwen2.5:7b via Ollama) answers and cites the retrieved papers
 5. Failure analysis, then improvements (BM25, reranker, full-text chunking)
 6. Scale up to more data
 
@@ -27,12 +27,19 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+Generation runs locally with [Ollama](https://ollama.com). Install it, then download the model (about 5 GB):
+
+```bash
+ollama pull qwen2.5:7b
+```
+
 ## Usage
 
 ```bash
 python src/data/fetch_arxiv.py  # corpus v0 -> data/raw/papers.jsonl
 python src/retrieval/index.py   # embeddings + FAISS index -> data/index/
 python src/evaluate.py <run_name> ["notes"]  # MRR, hit@1, hit@3 -> reports/runs.csv
+python src/rag.py "your question"  # top 3 papers + generated answer
 ```
 
 Run every command from the project root. Each evaluation adds one line to `reports/runs.csv` (parameters + scores) and writes per-query details in `reports/details/<run_name>.csv`. Progress and failures are logged in `reports/journal.md`.

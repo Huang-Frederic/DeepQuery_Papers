@@ -51,3 +51,13 @@ Failures:
 Observation: top-1 score is low on failed acronym queries (0.42 to 0.53), at least 0.64 on successes. A threshold could help to answer "I don't know".
 
 Ideas to test: BGE query instruction, add common names to the indexed text, HyDE, BM25 as a second baseline.
+
+## 2026-10-17 - Generation v1, first manual tries
+
+- Local LLM to keep it free: qwen2.5:7b with Ollama on an RTX 4060 (8 GB). Claude Haiku 5.5 was considered (about 2 cents per run) but dropped for cost.
+- `src/rag.py`: top 3 papers from retrieval v1, then the LLM answers with arXiv id citations, or "I don't know". Temperature 0, context 4096 tokens.
+
+First tries:
+- q06 (LoRA): right paper first, correct answer, cited [2106.09685].
+- q12 ("What's CLIP?"): retrieval fails (3 RAG papers), the LLM answers "I don't know". No hallucination, but no answer: the error comes from retrieval.
+- q18 (diffusion, out of corpus): "I don't know", followed by an explanation. The prompt asked for exactly "I don't know": the check will have to look at the start of the answer.
