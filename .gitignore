@@ -1,0 +1,20 @@
+# Code from a previous company project: kept local, never in the repo
+rag_export/
+rag_export.zip
+
+# Course material from the teacher (PDFs at the root): not redistributed
+/*.pdf
+
+# Data is not versioned (course advice: "Do not commit data"),
+# the scripts regenerate it
+data/
+
+# Secrets (API keys)
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
