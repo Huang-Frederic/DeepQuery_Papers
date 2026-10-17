@@ -6,8 +6,9 @@ rag_export.zip
 /*.pdf
 
 # Data is not versioned (course advice: "Do not commit data"),
-# the scripts regenerate it
-data/
+# the scripts regenerate it. The leading "/" limits the rule to the root folder,
+# otherwise it would also hide src/data/
+/data/
 
 # Secrets (API keys)
 .env
